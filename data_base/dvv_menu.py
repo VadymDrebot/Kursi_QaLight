@@ -6,7 +6,6 @@ cur = con.cursor()
 m_window = Tk()
 add=[]                                                          # пустой список для добавления элементов
 list_of_faks=['fak_f','fak_e','fak_m']                       # список факультетов
-
 list_of_fak_groups=['f_1','f_2','f_3']
 list_of_e_groups=['e_1','e_2','e_3']
 list_of_m_groups=['m_1','m_2']                                #  список групп
@@ -119,6 +118,7 @@ def load_tables(a,b,c):
                                 ON DELETE RESTRICT ON UPDATE CASCADE)""")
     cur.executemany("""INSERT INTO students VALUES(?,?,?,?,?,?)""", students_list)
 
+ #   create_lists()
     count_students_in_groups()
     con.commit()
     return
@@ -385,6 +385,8 @@ def change_delete_group():
         try:
             cur.execute("""DELETE FROM groups WHERE group_id=?""",a)
             con.commit()
+            if combo.get() in list_of_all_groups:            # удаление группы из списка list_of_all_groups
+                list_of_all_groups.remove(combo.get())       #
         except:
             Label(change_delete_group_window, text="Удаление группы невозможно,т.к."
                                               "в этой группе есть студенты",font=12).place(x=10, y=80)
@@ -393,6 +395,9 @@ def change_delete_group():
         list=[new_name.get(),old_group_id]
         cur.execute("""UPDATE groups SET group_id=? WHERE group_id=? """, list)
         con.commit()
+        i=list_of_all_groups.index(combo.get())         # получаем индекс заменяемого элемента
+        list_of_all_groups.remove(combo.get())          # удаляем заменяемый элемент
+        list_of_all_groups.insert(i,new_name.get())     # вставляем новый элемент на ЭТО же место
         return
     Label(change_delete_group_window, text="Выбор группы").place(x=10, y=20)
     Button(change_delete_group_window, text="Изменить", command=change).place(x=255, y=18)
