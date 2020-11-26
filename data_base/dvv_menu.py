@@ -16,7 +16,7 @@ list_of_all_groups = ['f_1','f_2','f_3','e_1','e_2','e_3','m_1','m_2']
 ###################################    очистка экрана
 def clean_window():                      # очистка экрана
     for i in range(10,1000,5):
-        l=Label(m_window, text="                                                                                    "
+        Label(m_window, text="                                                                                    "
                                "                                                                                    "
                                "                                                                                    "
                                "                                                                                    ").place(x=20, y=i)
@@ -48,6 +48,7 @@ def create_lists():
 
 
         ###################################    в меню выбрано "Стандартная база студентов"
+###################################    в меню выбрано "Стандартная база студентов"
 def choose_standart_tables():
     a,b,c=data_for_standart_tables()
     load_tables(a,b,c)
@@ -57,7 +58,6 @@ def choose_loaded_tables():
     load_tables(a,b,c)
 ###################################    создаются данные для стандартной базы
 def data_for_standart_tables():
-    fakultets_list, group_list, students_list = [], [], []
     fakultets_list = [('fak_f','ФАВТ','Козловский'),
                       ('fak_e', 'Экономический','Петровский'),
                       ('fak_m','Машиностроительный','Семановский')]
@@ -185,7 +185,7 @@ def view_groups():#################    просмотр групп--таблиц
             b += 230
         a += 30
     return
-###################################
+###################################          создание нового студента
 def new_student():
  #   list_groups = []
     add_window=Toplevel()                       # создание дополнительного(дочернего) окна
@@ -236,7 +236,7 @@ def new_student():
 
     add_window.mainloop()
     return
-
+###################################          изменение студента
 def change_student():
     list = []
     change_window = Toplevel()                    # создание дополнительного(дочернего) окна
@@ -362,11 +362,11 @@ def change_student():
     combo['values'] = ("ID", "Фамилии", "Имени")             # ищем по id\имени\фамилии
     combo.current(0)                                         # установка варианта( по умолчанию
     combo.place(x=90, y=20)
-    btn = Button(change_window, text="   OK   ", command=search).place(x=280, y=15)
+    Button(change_window, text="   OK   ", command=search).place(x=280, y=15)
 
     change_window.mainloop()
     return
-
+###################################          изменение\удаление группы
 def change_delete_group():
     change_delete_group_window = Toplevel(m_window)  # создание дополнительного(дочернего) окна
     change_delete_group_window.title("Изменение таблицы GROUPS")  # заголовок окна
@@ -409,7 +409,7 @@ def change_delete_group():
 
     change_delete_group_window.mainloop()
     return
-
+###################################          удаление студента
 def delete_student():
     del_window = Toplevel()             # создание дополнительного(дочернего) окна
     del_window.title("Удаление студента")  # заголовок окна
@@ -458,7 +458,7 @@ def delete_student():
 
     del_window.mainloop()
     return
-
+###################################          найти студента
 def find_student():
     add_window = Toplevel()                 # создание дополнительного(дочернего) окна
     add_window.title("Поиск студента")      # заголовок окна
@@ -497,7 +497,7 @@ def find_student():
     Entry(add_window, textvariable=find_mes,width=33).place(x=20, y=60)  # ввод с клавиатуры
     add_window.mainloop()
     return
-###################################   вывод схемы базы данных
+###################################          вывод схемы базы данных
 def view_base():
     schema = Toplevel()
     schema.title("Схема базы данных")
